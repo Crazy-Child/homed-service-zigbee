@@ -561,6 +561,25 @@ bool ZigBee::interviewQuirks(const Device &device)
     if (device->options().value("tuyaDataQuery").toBool())
         enqueueRequest(device, 0x01, CLUSTER_TUYA_DATA, zclHeader(FC_CLUSTER_SPECIFIC, m_requestId, 0x03), "data query request");
 
+
+
+    if (device->manufacturerName() == "_TZ3000_xwh1e22x")
+    {
+        QByteArray payload = QByteArray(1, 0x08);
+
+        for (quint8 i = 0; i < 8; i++)
+        {
+            quint16 value = qToLittleEndian <quint16> (i + 101);
+            payload.append(reinterpret_cast <char*> (&value), sizeof(value));
+            payload.append(1, i + 1);
+        }
+
+        logInfo << "here we are" << payload.toHex(':');
+        enqueueRequest(device, 0x01, CLUSTER_GROUPS, zclHeader(FC_CLUSTER_SPECIFIC, m_requestId, 0xF0).append(payload), "bla request");
+    }
+
+
+
     return true;
 }
 

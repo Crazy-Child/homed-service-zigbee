@@ -1242,6 +1242,18 @@
       "options":        {"action": {"enum": ["singleClick", "doubleClick", "hold"]}},
       "endpointId":     [1, 2, 3, 4]
     },
+
+
+    {
+      "description":    "TUYA Blah",
+      "modelNames":     ["_TZ3000_xwh1e22x"],
+      "properties":     ["batteryPercentage", "status"],
+      "exposes":        ["battery"],
+      "options":        {"tuyaMagic": true}
+    },
+
+
+
     {
       "description":    "Simon 2-Channel Switch S2100-1002",
       "modelNames":     ["S2100-1002"],
